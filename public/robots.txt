@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://the-dev-vak.github.io/personal-website/sitemap-index.xml
+Sitemap: https://kaveha.com/sitemap-index.xml

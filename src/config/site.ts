@@ -24,13 +24,12 @@ export const SITE = {
   focus: 'cloud solutions architecture & technical pre-sales',
 
   // ── Domain / hosting ───────────────────────────────────────────────────
-  // Serving on the github.io project URL for now. To switch to kaveha.com:
-  // set url='https://kaveha.com', base='', and re-add public/CNAME = kaveha.com.
-  domain: 'the-dev-vak.github.io',
-  // Origin used for sitemap, OG, JSON-LD (Astro combines it with `base`).
-  url: 'https://the-dev-vak.github.io',
-  // Project Pages live under /<repo>, so assets must be prefixed with it.
-  base: '/personal-website',
+  // Custom domain kaveha.com (served at root). Mirror in public/CNAME.
+  domain: 'kaveha.com',
+  // Full canonical origin. Used for sitemap, OG, JSON-LD.
+  url: 'https://kaveha.com',
+  // '' because the custom domain serves at the root.
+  base: '',
 
   // ── Links (one place to edit) ──────────────────────────────────────────
   // email is real; the rest are TODO until provided.
