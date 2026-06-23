@@ -1,0 +1,181 @@
+---
+import { SITE } from '../config/site';
+import { withBase } from '../utils/url';
+
+// Actions for the palette. type drives behavior in the script below.
+const items = [
+  { label: 'About', hint: 'section', type: 'section', value: 'about' },
+  { label: 'Experience', hint: 'section', type: 'section', value: 'experience' },
+  { label: 'Projects', hint: 'section', type: 'section', value: 'projects' },
+  { label: 'Skills', hint: 'section', type: 'section', value: 'skills' },
+  { label: 'Education', hint: 'section', type: 'section', value: 'education' },
+  { label: 'Certifications', hint: 'section', type: 'section', value: 'certifications' },
+  { label: 'Research & IP', hint: 'section', type: 'section', value: 'research' },
+  { label: 'Off the clock', hint: 'section', type: 'section', value: 'beyond' },
+  { label: 'Contact', hint: 'section', type: 'section', value: 'contact' },
+  { label: 'latchkey — case study', hint: 'page', type: 'link', value: withBase('/projects/latchkey') },
+  { label: 'WordDrop — case study', hint: 'page', type: 'link', value: withBase('/projects/worddrop') },
+  { label: 'Email me', hint: 'external', type: 'external', value: `mailto:${SITE.links.email}` },
+  { label: 'GitHub', hint: 'external', type: 'external', value: SITE.links.github },
+  { label: 'LinkedIn', hint: 'external', type: 'external', value: SITE.links.linkedin },
+  { label: 'latchkey.dev', hint: 'external', type: 'external', value: SITE.links.latchkey },
+  { label: 'Off the clock', hint: 'section', type: 'section', value: 'beyond' },
+];
+---
+
+<div
+  id="cmdk"
+  class="fixed inset-0 z-[60] hidden items-start justify-center bg-black/40 px-4 pt-[12vh] backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Command palette"
+>
+  <div
+    class="w-full max-w-lg overflow-hidden rounded-xl border border-border bg-bg shadow-2xl"
+    role="document"
+  >
+    <div class="flex items-center gap-2 border-b border-border px-4">
+      <span class="font-mono text-accent">$</span>
+      <input
+        id="cmdk-input"
+        type="text"
+        class="w-full bg-transparent py-3.5 font-mono text-sm text-text caret-accent outline-none placeholder:text-muted/60"
+        placeholder="Jump to a section, open a link, toggle the theme…"
+        aria-label="Search commands"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <kbd class="hidden shrink-0 rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted sm:inline">esc</kbd>
+    </div>
+    <ul id="cmdk-list" class="max-h-[50vh] overflow-y-auto p-2" role="listbox">
+      {
+        items.map((it, i) => (
+          <li
+            class="cmdk-item flex cursor-pointer items-center justify-between rounded-md px-3 py-2.5 text-sm"
+            role="option"
+            data-type={it.type}
+            data-value={it.value}
+            data-label={it.label.toLowerCase()}
+            data-index={i}
+          >
+            <span class="text-text">{it.label}</span>
+            <span class="font-mono text-[11px] text-muted">{it.hint}</span>
+          </li>
+        ))
+      }
+      <li id="cmdk-empty" class="hidden px-3 py-6 text-center font-mono text-sm text-muted">
+        no matches
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .cmdk-item.active,
+  .cmdk-item:hover {
+    background: var(--accent-soft);
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('cmdk');
+  const input = document.getElementById('cmdk-input') as HTMLInputElement | null;
+  const list = document.getElementById('cmdk-list');
+  const empty = document.getElementById('cmdk-empty');
+  if (modal && input && list) {
+    const items = Array.from(list.querySelectorAll<HTMLElement>('.cmdk-item'));
+    let active = 0;
+
+    const visible = () => items.filter((el) => !el.classList.contains('hidden'));
+
+    const setActive = (i: number) => {
+      const vis = visible();
+      if (!vis.length) return;
+      active = (i + vis.length) % vis.length;
+      items.forEach((el) => el.classList.remove('active'));
+      vis[active].classList.add('active');
+      vis[active].scrollIntoView({ block: 'nearest' });
+    };
+
+    const open = () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      input.value = '';
+      filter('');
+      input.focus();
+      document.body.style.overflow = 'hidden';
+    };
+    const close = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+    const isOpen = () => !modal.classList.contains('hidden');
+
+    function filter(q: string) {
+      const query = q.trim().toLowerCase();
+      let any = false;
+      items.forEach((el) => {
+        const match = !query || (el.dataset.label || '').includes(query);
+        el.classList.toggle('hidden', !match);
+        if (match) any = true;
+      });
+      empty?.classList.toggle('hidden', any);
+      active = 0;
+      setActive(0);
+    }
+
+    function run(el: HTMLElement) {
+      const type = el.dataset.type;
+      const value = el.dataset.value || '';
+      close();
+      if (type === 'section') {
+        const target = document.getElementById(value);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        else window.location.href = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/#${value}`;
+      } else if (type === 'link') {
+        window.location.href = value;
+      } else if (type === 'external') {
+        window.open(value, value.startsWith('mailto:') ? '_self' : '_blank');
+      } else if (type === 'theme') {
+        const isDark = document.documentElement.classList.toggle('dark');
+        const theme = isDark ? 'dark' : 'light';
+        document.documentElement.style.colorScheme = theme;
+        try {
+          localStorage.setItem('theme', theme);
+        } catch (e) {}
+      }
+    }
+
+    // open / close shortcuts
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        isOpen() ? close() : open();
+        return;
+      }
+      if (!isOpen()) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setActive(active + 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActive(active - 1);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const vis = visible();
+        if (vis[active]) run(vis[active]);
+      }
+    });
+
+    input.addEventListener('input', () => filter(input.value));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) close();
+    });
+    items.forEach((el) => el.addEventListener('click', () => run(el)));
+
+    // expose a trigger for the nav button
+    (window as any).openCmdK = open;
+  }
+</script>

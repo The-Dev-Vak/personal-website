@@ -1,0 +1,408 @@
+---
+import { SITE } from '../config/site';
+import { withBase } from '../utils/url';
+
+const term = {
+  name: SITE.name,
+  role: SITE.role,
+  pitch: SITE.pitch,
+  email: SITE.links.email,
+  github: SITE.links.github,
+  linkedin: SITE.links.linkedin,
+  latchkey: SITE.links.latchkey,
+  appStore: SITE.links.appStore,
+  resumeHref: withBase(SITE.resumePdf),
+  latchkeyPage: withBase('/projects/latchkey'),
+  worddropPage: withBase('/projects/worddrop'),
+};
+---
+
+<section id="top" class="relative overflow-hidden">
+  <canvas id="hero-mesh" class="pointer-events-none absolute inset-0 z-0 h-full w-full" aria-hidden="true"></canvas>
+
+  <div class="relative z-[1] mx-auto max-w-[1180px] px-6 py-16 sm:px-8 sm:pb-16 sm:pt-24">
+    <div class="grid items-center gap-12 md:grid-cols-[0.88fr_1.12fr] md:gap-12">
+      <!-- left -->
+      <div data-reveal>
+        <div class="flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.16em] text-muted">
+          <span class="live-dot inline-block h-2 w-2 rounded-full bg-live"></span>
+          available · {SITE.location.toLowerCase()}
+        </div>
+        <h1
+          class="relative mt-5 font-display text-[clamp(40px,5.4vw,68px)] font-semibold leading-[1.0] tracking-[-0.03em] text-text"
+          aria-label="Secure cloud, made simple. And I ship."
+        >
+          {/* sizer reserves the final height so typing never reflows the page */}
+          <span id="tw-sizer" aria-hidden="true"
+            >Secure cloud, made simple.<br /><span class="text-accent">And I ship.</span></span
+          >
+          {/* typed overlay sits exactly on top of the sizer */}
+          <span id="tw-live" class="absolute inset-0" aria-hidden="true"
+            ><span id="tw1"></span><br /><span id="tw2" class="text-accent"></span><span
+              id="tw-caret"
+              class="tw-caret"></span
+          ></span>
+        </h1>
+        <p class="mt-6 max-w-[520px] text-[19px] leading-[1.6] text-muted">
+          Cloud solutions architect at Microsoft and AWS, founder at latchkey, and the
+          technical-sales side of every deal. 20+ engagements across Canadian government and
+          enterprise.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3.5">
+          <a
+            href="#projects"
+            class="rounded-[10px] bg-accent px-[22px] py-[13px] font-display text-[15px] font-medium text-white transition hover:brightness-110 active:translate-y-px"
+          >
+            View work
+          </a>
+          <button
+            type="button"
+            onclick="window.openCmdK && window.openCmdK()"
+            class="flex items-center gap-2 px-1 py-2 font-mono text-[13px] text-subtle transition-colors hover:text-text"
+          >
+            jump anywhere <kbd class="rounded-md border border-line px-1.5 py-0.5 text-[11px]">⌘K</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- right: terminal -->
+      <div
+        data-reveal
+        class="overflow-hidden rounded-[14px] border bg-term shadow-[0_28px_64px_-28px_rgba(16,18,22,.5)]"
+        style="border-color:#20242B;"
+      >
+        <div class="flex items-center gap-2 border-b px-4 py-3.5" style="border-color:#1B1F26;">
+          <span class="h-[11px] w-[11px] rounded-full" style="background:#FF5F57;"></span>
+          <span class="h-[11px] w-[11px] rounded-full" style="background:#FEBC2E;"></span>
+          <span class="h-[11px] w-[11px] rounded-full" style="background:#28C840;"></span>
+          <span class="ml-2 font-mono text-[12.5px]" style="color:#7C828C;">kaveh@vancouver: ~</span>
+          <span class="ml-auto flex items-center gap-1.5 font-mono text-[11.5px]" style="color:#8A909A;">
+            <span class="live-dot inline-block h-[7px] w-[7px] rounded-full bg-live"></span> live
+          </span>
+        </div>
+
+        <div
+          id="term"
+          class="min-h-[230px] px-5 py-5 font-mono text-[15px] leading-[1.6] sm:px-6"
+          style="color:#C7CCD4;"
+        >
+          <div id="term-boot" data-boot>
+            <div class="term-line"><span class="t-prompt">$</span> whoami</div>
+            <div class="term-line">{term.name} · {term.role}</div>
+            <div class="term-line mt-1"><span class="t-prompt">$</span> kaveh --pitch</div>
+            <div class="term-line t-muted">&gt; {term.pitch}</div>
+          </div>
+          <div id="term-history" aria-live="polite"></div>
+          <form id="term-form" class="mt-2 flex items-center gap-2" autocomplete="off">
+            <label for="term-input" class="t-prompt" aria-hidden="true">$</label>
+            <input
+              id="term-input"
+              type="text"
+              class="w-full flex-1 border-none bg-transparent font-mono outline-none"
+              style="color:#C7CCD4;caret-color:#5b8cff;"
+              placeholder="type 'help' and hit enter"
+              aria-label="Terminal: try help, whoami, projects, resume, contact"
+              spellcheck="false"
+              autocapitalize="off"
+            />
+          </form>
+        </div>
+
+        <div
+          class="flex flex-wrap gap-x-6 gap-y-3.5 border-t px-[18px] py-3.5 font-mono text-[12px]"
+          style="border-color:#1B1F26; background:#0B0E12; color:#6E747E;"
+        >
+          <span>uptime <b class="font-medium" style="color:#C7CCD4;">99.98%</b></span>
+          <span>p50 <b id="tel-p50" class="font-medium" style="color:#C7CCD4;">42ms</b></span>
+          <span>req/min <b id="tel-rpm" class="font-medium" style="color:#C7CCD4;">240</b></span>
+          <span>region <b class="font-medium" style="color:#C7CCD4;">yvr</b></span>
+          <span>build <b class="font-medium text-accent">a3f9c1e</b></span>
+          <span class="ml-auto">session <b id="tel-session" class="font-medium" style="color:#C7CCD4;">00:00</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .term-line { white-space: pre-wrap; word-break: break-word; }
+  /* headline typewriter caret */
+  .tw-caret {
+    display: inline-block;
+    width: 0.06em;
+    min-width: 3px;
+    height: 0.92em;
+    margin-left: 0.06em;
+    vertical-align: -0.06em;
+    background: var(--ac);
+    animation: blink 1s steps(1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-caret { display: none; }
+  }
+  .t-prompt { color: #5b8cff; }
+  .t-muted { color: #8a909a; }
+  #term a { color: #7ea2ff; text-underline-offset: 2px; }
+  #term a:hover { text-decoration: underline; }
+</style>
+
+<script define:vars={{ term }}>
+  // ── interactive terminal ────────────────────────────────────────────────
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // headline typewriter. A sizer holds the full text (visible with no JS, for
+  // SEO/a11y) and reserves the final height; we hide it and type into an
+  // overlay on top, so wrapping to a new line never shifts the page.
+  (function () {
+    const sizer = document.getElementById('tw-sizer');
+    const l1 = document.getElementById('tw1');
+    const l2 = document.getElementById('tw2');
+    const caret = document.getElementById('tw-caret');
+    if (!sizer || !l1 || !l2 || !caret) return;
+    const t1 = sizer.firstChild ? sizer.firstChild.textContent || '' : '';
+    const accentEl = sizer.querySelector('span');
+    const t2 = accentEl ? accentEl.textContent || '' : '';
+    sizer.style.visibility = 'hidden'; // reserve space, hand off to overlay
+    if (reduce) {
+      l1.textContent = t1;
+      l2.textContent = t2;
+      return;
+    }
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const typeInto = async (el, text, speed) => {
+      el.after(caret);
+      for (const ch of text) {
+        el.textContent += ch;
+        await wait(speed);
+      }
+    };
+    (async () => {
+      await wait(180);
+      await typeInto(l1, t1, 45);
+      await wait(260);
+      await typeInto(l2, t2, 55);
+    })();
+  })();
+
+  const root = document.getElementById('term');
+  const boot = document.getElementById('term-boot');
+  const history = document.getElementById('term-history');
+  const form = document.getElementById('term-form');
+  const input = document.getElementById('term-input');
+
+  const esc = (s) =>
+    s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  function appendLine(html, cls = '') {
+    const el = document.createElement('div');
+    el.className = `term-line ${cls}`.trim();
+    el.innerHTML = html;
+    history.appendChild(el);
+    return el;
+  }
+  const link = (href, text, ext = true) =>
+    `<a href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}>${text}</a>`;
+
+  const commands = {
+    help: () =>
+      [
+        'available commands:',
+        '  whoami     who I am',
+        '  pitch      the one-liner',
+        '  projects   what I have built',
+        '  contact    how to reach me',
+        '  clear      clear the screen',
+      ].join('\n'),
+    whoami: () => `${term.name} · ${term.role}`,
+    pitch: () => `> ${term.pitch}`,
+    projects: () =>
+      [
+        `latchkey   AI-powered CI/CD · ${link(term.latchkeyPage, 'case study', false)} · ${link(term.latchkey, 'latchkey.dev')}`,
+        `worddrop   minimalist word game · ${link(term.worddropPage, 'case study', false)} · ${link(term.appStore, 'App Store')}`,
+        `securesight security data lake (AWS, the biggest system I have built)`,
+      ].join('\n'),
+    contact: () =>
+      [
+        `email      ${link('mailto:' + term.email, term.email, false)}`,
+        `github     ${link(term.github, term.github)}`,
+        `linkedin   ${link(term.linkedin, term.linkedin)}`,
+      ].join('\n'),
+    clear: () => { history.innerHTML = ''; return null; },
+    ls: () => 'about  experience  projects  skills  certs  contact',
+    sudo: () => "permission denied: nice try 😏  (you don't have root here)",
+    '': () => null,
+  };
+
+  function run(raw) {
+    const cmd = raw.trim().toLowerCase();
+    if (raw.trim() !== '') appendLine(`<span class="t-prompt">$</span> ${esc(raw)}`);
+    const handler = commands[cmd];
+    if (handler) {
+      const out = handler();
+      if (out !== null && out !== undefined) appendLine(out, 't-muted');
+    } else {
+      appendLine(`command not found: ${esc(cmd)} · type <span class="t-prompt">help</span>`, 't-muted');
+    }
+    root.scrollIntoView({ block: 'nearest' });
+  }
+
+  form?.addEventListener('submit', (e) => { e.preventDefault(); const v = input.value; input.value = ''; run(v); });
+
+  async function typeBoot() {
+    const lines = [
+      { prompt: true, text: 'whoami' },
+      { prompt: false, text: `${term.name} · ${term.role}` },
+      { prompt: true, text: 'kaveh --pitch' },
+      { prompt: false, text: `> ${term.pitch}`, muted: true },
+    ];
+    boot.innerHTML = '';
+    for (const line of lines) {
+      const row = document.createElement('div');
+      row.className = 'term-line' + (line.muted ? ' t-muted' : '');
+      row.innerHTML = line.prompt ? '<span class="t-prompt">$</span> ' : '';
+      const target = document.createElement('span');
+      row.appendChild(target);
+      boot.appendChild(row);
+      for (const ch of line.text) { target.textContent += ch; await sleep(15); }
+      await sleep(line.prompt ? 90 : 240);
+    }
+    input?.focus();
+  }
+  if (!reduce) typeBoot();
+
+  // ── live telemetry footer (gentle jitter + session timer) ────────────────
+  (function () {
+    const p50 = document.getElementById('tel-p50');
+    const rpm = document.getElementById('tel-rpm');
+    const ses = document.getElementById('tel-session');
+    const t0 = Date.now();
+    const pad = (n) => String(n).padStart(2, '0');
+    function tick() {
+      const s = Math.floor((Date.now() - t0) / 1000);
+      if (ses) ses.textContent = `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+    }
+    setInterval(tick, 1000);
+    if (!reduce) {
+      setInterval(() => {
+        if (p50) p50.textContent = `${39 + Math.floor(Math.random() * 8)}ms`;
+        if (rpm) rpm.textContent = `${228 + Math.floor(Math.random() * 26)}`;
+      }, 2200);
+    }
+  })();
+
+  // ── background node mesh (subtle, design accent) ─────────────────────────
+  (function () {
+    const canvas = document.getElementById('hero-mesh');
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const MESH = '#1f47ff';
+    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let nodes = [], packets = [], pulses = [], frame = 0;
+    const LINK = 155, CURSOR = 210;
+    let mouse = { x: -9999, y: -9999, active: false };
+
+    function neighbour(i) {
+      const a = nodes[i], c = [];
+      for (let j = 0; j < nodes.length; j++) {
+        if (j === i) continue;
+        if (Math.hypot(a.x - nodes[j].x, a.y - nodes[j].y) < LINK) c.push(j);
+      }
+      return c.length ? c[Math.floor(Math.random() * c.length)] : -1;
+    }
+    function build() {
+      const r = canvas.getBoundingClientRect();
+      w = r.width; h = r.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.min(40, Math.round((w * h) / 22000));
+      nodes = Array.from({ length: n }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
+      }));
+      packets = []; pulses = [];
+      for (let i = 0; i < Math.max(5, Math.round(n / 5)); i++) {
+        const f = Math.floor(Math.random() * n), t = neighbour(f);
+        if (t >= 0) packets.push({ from: f, to: t, t: Math.random(), speed: 0.004 + Math.random() * 0.006 });
+      }
+    }
+    function draw() {
+      frame++;
+      ctx.clearRect(0, 0, w, h);
+      for (const nd of nodes) {
+        nd.x += nd.vx; nd.y += nd.vy;
+        if (mouse.active) {
+          const dx = mouse.x - nd.x, dy = mouse.y - nd.y, d = Math.hypot(dx, dy);
+          if (d < CURSOR && d > 1) { const p = (1 - d / CURSOR) * 0.05; nd.vx += (dx / d) * p; nd.vy += (dy / d) * p; }
+        }
+        nd.vx = Math.max(-0.8, Math.min(0.8, nd.vx * 0.99));
+        nd.vy = Math.max(-0.8, Math.min(0.8, nd.vy * 0.99));
+        if (nd.x < 0 || nd.x > w) nd.vx *= -1;
+        if (nd.y < 0 || nd.y > h) nd.vy *= -1;
+      }
+      for (let i = 0; i < nodes.length; i++)
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < LINK) {
+            ctx.globalAlpha = (1 - d / LINK) * 0.16;
+            ctx.strokeStyle = MESH; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      if (mouse.active)
+        for (const nd of nodes) {
+          const d = Math.hypot(mouse.x - nd.x, mouse.y - nd.y);
+          if (d < CURSOR) {
+            ctx.globalAlpha = (1 - d / CURSOR) * 0.4;
+            ctx.strokeStyle = MESH; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(nd.x, nd.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+          }
+        }
+      if (frame % 80 === 0 && nodes.length) {
+        const nd = nodes[Math.floor(Math.random() * nodes.length)];
+        pulses.push({ x: nd.x, y: nd.y, r: 2, max: 55 + Math.random() * 35 });
+      }
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i]; p.r += 0.8;
+        const a = Math.max(0, 1 - p.r / p.max);
+        if (a <= 0) { pulses.splice(i, 1); continue; }
+        ctx.globalAlpha = a * 0.35; ctx.strokeStyle = MESH; ctx.lineWidth = 1.1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.stroke();
+      }
+      for (const pk of packets) {
+        pk.t += pk.speed;
+        if (pk.t >= 1) { const nx = neighbour(pk.to); pk.from = pk.to; pk.to = nx >= 0 ? nx : Math.floor(Math.random() * nodes.length); pk.t = 0; }
+        const a = nodes[pk.from], b = nodes[pk.to];
+        if (!a || !b) continue;
+        const x = a.x + (b.x - a.x) * pk.t, y = a.y + (b.y - a.y) * pk.t;
+        ctx.globalAlpha = 0.85; ctx.fillStyle = MESH; ctx.shadowColor = MESH; ctx.shadowBlur = 6;
+        ctx.beginPath(); ctx.arc(x, y, 1.7, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
+      }
+      ctx.globalAlpha = 0.5; ctx.fillStyle = MESH;
+      for (const nd of nodes) { ctx.beginPath(); ctx.arc(nd.x, nd.y, 1.7, 0, Math.PI * 2); ctx.fill(); }
+      ctx.globalAlpha = 1;
+    }
+    let raf = 0;
+    const loop = () => { draw(); raf = requestAnimationFrame(loop); };
+    build();
+    if (reduceM) draw();
+    else {
+      loop();
+      const sec = canvas.closest('section');
+      const onMove = (e) => {
+        const r = canvas.getBoundingClientRect();
+        const p = 'touches' in e && e.touches[0] ? e.touches[0] : e;
+        mouse.x = p.clientX - r.left; mouse.y = p.clientY - r.top;
+        mouse.active = mouse.x >= 0 && mouse.x <= w && mouse.y >= 0 && mouse.y <= h;
+      };
+      sec?.addEventListener('pointermove', onMove, { passive: true });
+      sec?.addEventListener('pointerleave', () => (mouse.active = false), { passive: true });
+    }
+    let t;
+    window.addEventListener('resize', () => {
+      clearTimeout(t);
+      t = setTimeout(() => { cancelAnimationFrame(raf); build(); reduceM ? draw() : loop(); }, 200);
+    });
+  })();
+</script>

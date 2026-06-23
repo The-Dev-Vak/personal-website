@@ -1,0 +1,86 @@
+---
+layout: ../../layouts/Prose.astro
+title: latchkey.dev
+kicker: case study · founder
+description: latchkey, an AI-powered CI/CD platform that makes GitHub Actions self-healing.
+summary: An AI-powered DevOps platform that turns GitHub Actions from a black box into a self-healing system, surfacing cloud cost, security, and pipeline-performance insights, then fixing them.
+meta:
+  - 'Co-Founder & COO'
+  - '$5K MRR'
+  - '$25K pre-seed'
+  - '$1M valuation'
+cta:
+  label: Try latchkey
+  url: https://latchkey.dev
+---
+
+import { withBase } from '../../utils/url';
+
+<figure>
+  <img
+    src={withBase('/img/latchkey-team.jpg')}
+    alt="The latchkey team at Web Summit Vancouver"
+    loading="lazy"
+    decoding="async"
+    style="width:100%;border-radius:12px;border:1px solid var(--border);"
+  />
+  <figcaption style="margin-top:0.5rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--muted);">
+    The latchkey team at Web Summit Vancouver.
+  </figcaption>
+</figure>
+
+## The problem
+
+CI/CD is where modern engineering teams actually feel pain. GitHub Actions is powerful but opaque: pipelines fail for reasons buried in logs, cloud spend creeps with no attribution, and security regressions slip through because nobody has time to audit every workflow. Teams either over-invest in a platform team or quietly accept the waste.
+
+We kept watching the same story play out, at startups and at enterprises. Nobody owned the pipeline, so the pipeline owned everyone.
+
+## What we built
+
+latchkey sits on top of your GitHub Actions and gives the pipeline a brain. An **agentic AI backend** watches every run and answers three questions a platform engineer would otherwise answer by hand:
+
+- **Cost**, where is cloud spend going, and which jobs are wasteful?
+- **Security**, what vulnerabilities and misconfigurations just entered the pipeline?
+- **Performance**, which steps are slow, flaky, or redundant?
+
+The goal isn't another dashboard. It's *self-healing*, surfacing the fix, not just the finding, and opening the PR when you let it.
+
+## See it live
+
+<div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);">
+  <div style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.9rem;border-bottom:1px solid var(--border);">
+    <span style="width:11px;height:11px;border-radius:99px;background:#f87171;"></span>
+    <span style="width:11px;height:11px;border-radius:99px;background:#fbbf24;"></span>
+    <span style="width:11px;height:11px;border-radius:99px;background:#34d399;"></span>
+    <span style="margin-left:0.6rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);">latchkey.dev</span>
+  </div>
+  <iframe
+    src="https://latchkey.dev"
+    title="latchkey.dev live"
+    loading="lazy"
+    style="display:block;width:100%;height:520px;border:0;background:#fff;"
+    sandbox="allow-scripts allow-same-origin allow-popups"
+  ></iframe>
+</div>
+
+<p style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted);">
+  Embed not loading? Some browsers block cross-site frames, {' '}
+  <a href="https://latchkey.dev" target="_blank" rel="noopener">open latchkey.dev in a new tab ↗</a>.
+</p>
+
+## Architecture
+
+A static landing page and onboarding flow (which I designed and built end-to-end) sits in front of an agentic backend that ingests workflow telemetry, reasons over it, and proposes concrete changes. The product is wired the way my resume reads: secure by default, observable, and built to scale without a platform team babysitting it.
+
+## My role
+
+I co-founded latchkey and lead it as COO. I **led customer acquisition end-to-end**: the outreach, the demos, and the conversations that turned early users into paying customers. I also owned the **public landing page and onboarding flow**, the first thing every user touches, while collaborating with engineering on the AI agent backend integration that does the heavy lifting, plus the go-to-market: pricing and the LAUNCH raise.
+
+## Results
+
+- Scaled to **$5K MRR**.
+- Secured **$25,000 in pre-seed funding** from LAUNCH at a **$1M valuation**, validating that the product measurably reduces cloud waste and accelerates deployment speed.
+
+## Why it matters here
+
+latchkey is the founder half of the story: I don't just architect secure infrastructure for enterprises, I ship a product that sells, on my own. The same instincts (secure, observable, fast) show up whether the customer is a federal agency or a startup's CI pipeline.

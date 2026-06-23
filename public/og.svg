@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Kaveh Alemi">
+  <rect width="1200" height="630" fill="#0E0F12"/>
+  <rect x="56" y="56" width="1088" height="518" rx="20" fill="none" stroke="#26272E" stroke-width="2"/>
+  <text x="104" y="190" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="28" fill="#5BA3FF">$ whoami</text>
+  <text x="104" y="300" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="700" fill="#E9E9EC">Kaveh Alemi</text>
+  <text x="104" y="370" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="30" fill="#9A9AA4">infrastructure &amp; security engineer · founder</text>
+  <text x="104" y="488" font-family="Inter, system-ui, sans-serif" font-size="40" font-weight="500" fill="#E9E9EC">I make hard, secure systems feel simple. And I ship.</text>
+  <circle cx="1096" cy="104" r="6" fill="#34D399"/>
+</svg>

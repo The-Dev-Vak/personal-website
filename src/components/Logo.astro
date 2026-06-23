@@ -1,0 +1,63 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { withBase } from '../utils/url';
+
+/**
+ * Brand logo with a graceful fallback.
+ * If public/logos/<name>.(svg|png|jpg|webp) exists at build time, it's used.
+ * Otherwise a clean monogram tile renders, so the layout never breaks and
+ * dropping a real logo into public/logos/ upgrades it automatically.
+ */
+interface Props {
+  name: string;
+  label: string;
+  size?: number;
+  /** Override the monogram fallback text (e.g. 'GT', 'UBC'). */
+  initials?: string;
+  class?: string;
+}
+const { name, label, size = 44, initials: initialsProp, class: className = '' } = Astro.props;
+
+const exts = ['svg', 'png', 'jpg', 'jpeg', 'webp'];
+let file: string | null = null;
+try {
+  const dir = path.resolve('public/logos');
+  for (const ext of exts) {
+    if (fs.existsSync(path.join(dir, `${name}.${ext}`))) {
+      file = `${name}.${ext}`;
+      break;
+    }
+  }
+} catch {
+  /* fs unavailable, fall through to monogram */
+}
+
+const words = label
+  .replace(/[^A-Za-z0-9 ]/g, '')
+  .split(/\s+/)
+  .filter(Boolean);
+const initials = (
+  initialsProp ?? (words.length > 1 ? words.map((w) => w[0]).slice(0, 2).join('') : words[0].slice(0, 2))
+).toUpperCase();
+---
+
+<span
+  class={`grid shrink-0 place-items-center overflow-hidden rounded-lg border border-border bg-white ${className}`}
+  style={`width:${size}px;height:${size}px`}
+  aria-hidden="true"
+>
+  {
+    file ? (
+      <img
+        src={withBase(`/logos/${file}`)}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        class="h-full w-full object-contain p-1.5"
+      />
+    ) : (
+      <span class="font-mono text-sm font-semibold text-[#0E0F12]">{initials}</span>
+    )
+  }
+</span>

@@ -1,0 +1,43 @@
+---
+layout: ../../layouts/Prose.astro
+title: WordDrop
+kicker: case study · product
+description: WordDrop, a minimalist, privacy-first vocabulary puzzle on the App Store.
+summary: A calm, privacy-first vocabulary puzzle on the App Store. The deliberate opposite of my day job, proof that the same hands that build compliance platforms can ship something quiet and joyful.
+meta:
+  - 'iOS'
+  - 'privacy-first'
+  - 'zero data collected'
+  - 'App Store'
+---
+
+import { SITE } from '../../config/site';
+import { withBase } from '../../utils/url';
+
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+  <img src={withBase('/img/worddrop-icon.png')} alt="WordDrop app icon" width="72" height="72" style="width:72px;height:72px;border-radius:16px;border:1px solid var(--line);" />
+  <div style="font-family:var(--font-mono);font-size:13px;color:var(--muted);">Master the falling letters.</div>
+</div>
+
+## The contrast is the point
+
+My day job is complex by necessity: PBMM landing zones, compliance platforms, Kubernetes. WordDrop is the opposite on purpose, a small, calm word game with nothing to prove and nothing to harvest. Building both is the whole thesis of this site: **I can make hard systems feel simple, and I can ship simple things that feel finished.**
+
+<figure style="margin:2.5rem auto;max-width:300px;">
+  <img src={withBase('/img/worddrop-game.png')} alt="WordDrop gameplay: letters falling onto a grid to form words" loading="lazy" style="width:100%;border-radius:14px;border:1px solid var(--line);" />
+  <figcaption style="margin-top:0.6rem;text-align:center;font-family:var(--font-mono);font-size:0.78rem;color:var(--subtle);">WordDrop in play, build words from the falling letters before the grid fills.</figcaption>
+</figure>
+
+## Design philosophy
+
+- **Minimalist by default.** One clear thing to do per screen. No menus shouting for attention, no dark patterns, no nagging.
+- **Privacy-first.** WordDrop collects **zero** data. That's not a setting you toggle, it's the architecture. "Data not collected" is the most honest privacy policy there is.
+- **Accessible.** High contrast, respects system motion preferences, readable type. The same care I bring to a cloud architecture review, applied to a word game.
+
+## Why a cloud architect ships a word game
+
+Because restraint is a skill. Knowing what to leave out, of a product, of an interface, of a data-collection policy, is the same discipline that keeps a landing zone clean. WordDrop is where I practice it without a customer in the room.
+
+<div style="margin-top:1.5rem;">
+  <a href={SITE.links.appStore} target="_blank" rel="noopener" style="display:inline-block;border-radius:10px;background:var(--ac);color:#fff;padding:0.7rem 1.2rem;font-weight:600;text-decoration:none;">Download on the App Store ↗</a>
+</div>

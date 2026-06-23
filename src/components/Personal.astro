@@ -1,0 +1,64 @@
+---
+import { withBase } from '../utils/url';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+
+const candids = [
+  { src: '/img/me-cat.jpg', alt: 'Kaveh making friends with a cat outdoors' },
+  { src: '/img/me-cat-2.jpg', alt: 'Kaveh greeting a street cat' },
+];
+---
+
+<Section id="beyond" num="08" kicker="off the clock" title="A person, not a resume">
+  <div class="grid items-center gap-10 md:grid-cols-[1fr_0.82fr] md:gap-14">
+    <Reveal class="space-y-5 text-base leading-relaxed text-muted sm:text-lg">
+      <p>
+        When I'm not in a terminal, I'm almost certainly with a cat. I'm a shameless cat
+        person, the kind who will crouch in a field to make a new friend and negotiate trust
+        one slow blink at a time.
+      </p>
+      <p>
+        My own cat is a small black menace who supervises every late-night deploy from the
+        corner of the desk. Turns out the best debugging partner is one who has zero opinions
+        about your stack trace and full opinions about dinner.
+      </p>
+      <p>
+        I'm also a <span class="text-text">mechanical keyboard</span> hobbyist, lubing
+        switches, hunting the perfect tactile bump, and chasing that <em>thock</em>. Same
+        instinct as the rest of my work, honestly: take something most people never think
+        about and obsess over making it feel exactly right.
+      </p>
+      <p class="font-mono text-sm text-subtle">
+        $ uptime · powered by espresso, a purring code reviewer, and a very loud keyboard
+      </p>
+    </Reveal>
+
+    <Reveal>
+      <img
+        src={withBase('/img/black-cat.jpg')}
+        alt="Kaveh's black cat, the resident deploy supervisor"
+        width="700"
+        height="560"
+        loading="lazy"
+        decoding="async"
+        class="aspect-[5/4] w-full rounded-[14px] border border-line object-cover"
+      />
+    </Reveal>
+  </div>
+
+  <Reveal class="mt-5 grid grid-cols-2 gap-3">
+    {
+      candids.map((p) => (
+        <img
+          src={withBase(p.src)}
+          alt={p.alt}
+          width="500"
+          height="667"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[3/4] w-full rounded-[14px] border border-line object-cover transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+        />
+      ))
+    }
+  </Reveal>
+</Section>

@@ -1,0 +1,63 @@
+---
+import type { Project } from '../data/projects';
+import { withBase } from '../utils/url';
+
+interface Props {
+  project: Project;
+  /** Resolved external link (e.g. WordDrop App Store from site config). */
+  external?: { label: string; url: string };
+}
+const { project, external } = Astro.props;
+const ext = external ?? project.external;
+const caseHref = project.href ? withBase(project.href) : undefined;
+---
+
+<article
+  class="group flex h-full flex-col rounded-xl border border-border bg-surface/40 p-6 transition duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/10"
+>
+  <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{project.kind}</p>
+  <h3 class="mt-2 text-xl font-semibold tracking-tight text-text">
+    {
+      caseHref ? (
+        <a href={caseHref} class="after:absolute group-hover:text-accent">
+          {project.name}
+        </a>
+      ) : (
+        project.name
+      )
+    }
+  </h3>
+  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">{project.blurb}</p>
+
+  <ul class="mt-5 flex flex-wrap gap-2">
+    {
+      project.metrics.map((m) => (
+        <li class="rounded-md border border-border bg-bg/40 px-2.5 py-1 font-mono text-xs text-muted">
+          {m}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm">
+    {
+      caseHref && (
+        <a href={caseHref} class="text-accent underline-offset-4 hover:underline">
+          → case study
+        </a>
+      )
+    }
+    {
+      ext && (
+        <a
+          href={ext.url}
+          target="_blank"
+          rel="noopener"
+          class="text-muted underline-offset-4 hover:text-accent hover:underline"
+        >
+          ↗ {ext.label}
+        </a>
+      )
+    }
+  </div>
+</article>

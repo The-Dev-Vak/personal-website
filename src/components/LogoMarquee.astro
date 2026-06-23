@@ -1,0 +1,67 @@
+---
+import Logo from './Logo.astro';
+
+// Where I've worked + trained. Real logos where present, clean monograms
+// otherwise (with explicit initials so they read right).
+const brands = [
+  { name: 'microsoft', label: 'Microsoft' },
+  { name: 'aws', label: 'Amazon Web Services', initials: 'AWS' },
+  { name: 'latchkey', label: 'latchkey', initials: 'LK' },
+  { name: 'cibc', label: 'CIBC', initials: 'CIBC' },
+  { name: 'rbc', label: 'RBC Capital Markets', initials: 'RBC' },
+  { name: 'gatech', label: 'Georgia Tech', initials: 'GT' },
+  { name: 'sfu', label: 'Simon Fraser University', initials: 'SFU' },
+  { name: 'ubc', label: 'UBC', initials: 'UBC' },
+  { name: 'powerex', label: 'Powerex', initials: 'PWX' },
+];
+// Duplicate the list so the track can loop seamlessly.
+const track = [...brands, ...brands];
+---
+
+<section class="overflow-hidden border-b border-border bg-bg py-6" aria-label="Organizations I've worked with and trained at">
+  <p class="mb-5 text-center font-mono text-xs uppercase tracking-[0.2em] text-muted">
+    worked &amp; trained across
+  </p>
+  <div class="marquee-mask">
+    <div class="marquee-track flex w-max items-center gap-4">
+      {
+        track.map((b, i) => (
+          <div class="flex items-center gap-2.5 rounded-lg border border-border bg-surface/40 px-3 py-2" aria-hidden={i >= brands.length}>
+            <Logo name={b.name} label={b.label} initials={b.initials} size={28} />
+            <span class="whitespace-nowrap font-mono text-[13px] text-muted">{b.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* -50% because the list is duplicated once */
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import { EDUCATION } from '../data/education';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+import Logo from './Logo.astro';
+---
+
+<Section id="education" num="06" kicker="education" title="Where I studied">
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+    {
+      EDUCATION.map((e) => (
+        <Reveal class="rounded-[14px] border border-line bg-surface p-[30px]">
+          <div class="flex items-center gap-3.5">
+            <Logo name={e.logo} label={e.school} size={44} />
+            <h3 class="font-display text-[22px] font-semibold tracking-[-0.01em] text-text">
+              {e.school}
+            </h3>
+          </div>
+          <div class="mt-5 text-[17px] text-text">{e.degree}</div>
+          <div class="mt-0.5 text-[15px] text-muted">{e.focus}</div>
+          <div class="mt-[18px] flex flex-wrap items-center gap-3">
+            <span class="rounded-lg border border-line px-[11px] py-1.5 font-mono text-[13px] text-accent">
+              GPA {e.gpa}
+            </span>
+            <span class="font-mono text-[12.5px] text-subtle">{e.dates}</span>
+          </div>
+        </Reveal>
+      ))
+    }
+  </div>
+</Section>

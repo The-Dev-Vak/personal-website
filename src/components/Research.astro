@@ -1,0 +1,54 @@
+---
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+
+const PAPER_URL = 'https://www.sciencedirect.com/science/article/pii/S0010482524014094';
+const PATENT_URL = 'https://patentcenter.uspto.gov/applications/17893864';
+---
+
+<Section id="research" num="07" kicker="research & ip" title="Work that outlived the project">
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+    <Reveal class="flex flex-col rounded-[14px] border border-line bg-surface p-[30px]">
+      <div class="font-mono text-[11.5px] font-medium uppercase tracking-[0.18em] text-accent">
+        peer-reviewed paper
+      </div>
+      <h3 class="mt-3.5 font-display text-[21px] font-semibold leading-[1.2] tracking-[-0.01em] text-text">
+        Machine learning identifies genetic predictors of cisplatin-induced ototoxicity
+      </h3>
+      <div class="mt-2.5 font-mono text-[12.5px] text-subtle">
+        Arab, A., et al. (2024) · Computers in Biology and Medicine, 183, 109324
+      </div>
+      <p class="mt-4 flex-1 text-[16px] leading-[1.55] text-muted">
+        Started as an undergraduate research project in the Ester Lab at SFU: a deep-learning
+        model to predict who would suffer hearing loss from cisplatin chemotherapy, built to stay
+        interpretable and resilient to bias. The results were strong enough that the lab's PhD
+        students carried it forward, and it was published in a peer-reviewed journal.
+      </p>
+      <a href={PAPER_URL} target="_blank" rel="noopener" class="mt-[18px] font-mono text-[13px] text-accent hover:underline">
+        ↗ read on ScienceDirect
+      </a>
+    </Reveal>
+
+    <Reveal class="flex flex-col rounded-[14px] border border-line bg-surface p-[30px]">
+      <div class="font-mono text-[11.5px] font-medium uppercase tracking-[0.18em] text-accent">
+        us patent application
+      </div>
+      <h3 class="mt-3.5 font-display text-[21px] font-semibold leading-[1.2] tracking-[-0.01em] text-text">
+        Kubernetes resource-optimization engine
+      </h3>
+      <div class="mt-2.5 font-mono text-[12.5px] text-subtle">
+        Alemi, K. (2023) · US 2023/0061641 A1 · Appl. 17/893,864
+      </div>
+      <p class="mt-4 flex-1 text-[16px] leading-[1.55] text-muted">
+        During my Data Scientist internship at RBC Capital Markets I built an engine that learns
+        how containerized workloads actually consume CPU and memory, then right-sizes Kubernetes
+        resource requests automatically, projected to save $2.5M in infrastructure cost. The
+        approach was novel enough that RBC filed it as a US patent application, with me named as
+        inventor.
+      </p>
+      <a href={PATENT_URL} target="_blank" rel="noopener" class="mt-[18px] font-mono text-[13px] text-accent hover:underline">
+        ↗ view on USPTO Patent Center
+      </a>
+    </Reveal>
+  </div>
+</Section>

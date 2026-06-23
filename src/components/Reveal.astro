@@ -1,0 +1,14 @@
+---
+// Wraps content in a fade/slide-on-scroll container. Neutralized by CSS
+// under prefers-reduced-motion; an IntersectionObserver adds .is-visible.
+interface Props {
+  as?: string;
+  class?: string;
+}
+const { as = 'div', class: className = '' } = Astro.props;
+const Tag = as;
+---
+
+<Tag class={`reveal ${className}`} data-reveal>
+  <slot />
+</Tag>

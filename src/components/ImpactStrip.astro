@@ -1,0 +1,58 @@
+---
+const stats = [
+  { prefix: '$', value: 5, suffix: 'M+', label: 'revenue delivered' },
+  { prefix: '', value: 10, suffix: '/10', label: 'avg client satisfaction' },
+  { prefix: '', value: 20, suffix: '+', label: 'client engagements' },
+  { prefix: '', value: 25, suffix: '', label: 'cloud certifications' },
+];
+---
+
+<section class="border-y border-line2" style="background:rgba(16,18,22,.015);">
+  <div
+    class="mx-auto grid max-w-[1180px] grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-4 sm:px-8"
+    data-impact
+  >
+    {
+      stats.map((s) => (
+        <div class="text-center">
+          <div
+            class="font-display text-[clamp(38px,4.5vw,54px)] font-bold leading-none tracking-[-0.03em] text-text"
+          >
+            <span>{s.prefix}</span><span class="tabular-nums" data-count={s.value} data-suffix={s.suffix}>{s.value}{s.suffix}</span>
+          </div>
+          <div class="mt-2 text-[15px] text-muted">{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wrap = document.querySelector('[data-impact]');
+  if (wrap && !reduce && 'IntersectionObserver' in window) {
+    const run = (el: HTMLElement) => {
+      const target = Number(el.dataset.count || '0');
+      const suffix = el.dataset.suffix || '';
+      const start = performance.now();
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - start) / 1100);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3))) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            wrap.querySelectorAll<HTMLElement>('[data-count]').forEach(run);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(wrap);
+  }
+</script>

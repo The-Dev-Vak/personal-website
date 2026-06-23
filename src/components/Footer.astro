@@ -1,0 +1,60 @@
+---
+import { SITE } from '../config/site';
+
+const built = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+
+const contacts = [
+  { label: 'email', value: SITE.links.email, href: `mailto:${SITE.links.email}`, ext: false },
+  { label: 'github', value: 'The-Dev-Vak', href: SITE.links.github, ext: true },
+  { label: 'linkedin', value: 'in/kvalemi', href: SITE.links.linkedin, ext: true },
+  { label: 'app store', value: 'WordDrop', href: SITE.links.appStore, ext: true },
+  { label: 'latchkey', value: 'latchkey.dev', href: SITE.links.latchkey, ext: true },
+];
+---
+
+<footer id="contact" class="mx-auto max-w-[1180px] border-t border-line2 px-6 pb-16 pt-20 sm:px-8 sm:pb-[60px] sm:pt-[104px]">
+  <div>
+    <div class="flex items-center gap-3.5">
+      <span class="draw-line h-0.5 w-11 bg-accent" data-reveal></span>
+      <span class="font-mono text-xs font-medium uppercase tracking-[0.22em] text-accent">09 — contact</span>
+    </div>
+    <h2
+      class="mt-4 max-w-3xl font-display text-[clamp(36px,5vw,60px)] font-semibold leading-[1.02] tracking-[-0.03em] text-text"
+    >
+      Let's build something excellent.
+    </h2>
+    <p class="mt-5 max-w-xl text-[19px] leading-relaxed text-muted">
+      A cloud problem, a product, or a role worth talking about. Email is the fastest way to
+      reach me, everything else is below.
+    </p>
+  </div>
+
+  <div class="mt-11 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      contacts.map((c) => (
+        <a
+          href={c.href}
+          {...c.ext ? { target: '_blank', rel: 'noopener' } : {}}
+          class="group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-md"
+        >
+          <span class="min-w-0">
+            <span class="block font-mono text-[10.5px] uppercase tracking-[0.18em] text-subtle">
+              {c.label}
+            </span>
+            <span class="mt-1 block truncate font-mono text-[15px] text-text">{c.value}</span>
+          </span>
+          <span class="font-mono text-base text-subtle transition-colors group-hover:text-accent">
+            {c.ext ? '↗' : '✉'}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+
+  <div
+    class="mt-16 flex flex-wrap justify-between gap-3 border-t border-line2 pt-6 font-mono text-[12.5px] text-subtle"
+  >
+    <span>$ echo "built by hand · kaveh_alemi · deployed from yvr"</span>
+    <span>last build: {built}</span>
+  </div>
+</footer>

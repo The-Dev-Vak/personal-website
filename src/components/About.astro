@@ -1,0 +1,61 @@
+---
+import { SITE } from '../config/site';
+import { withBase } from '../utils/url';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+
+const facts = [
+  ['location', 'Vancouver, BC'],
+  ['now', 'Cloud Solution Architect @ Microsoft'],
+  ['focus', 'solutions architecture · technical pre-sales'],
+  ['building', 'latchkey.dev · WordDrop'],
+  ['studying', 'MSCS @ Georgia Tech (4.0)'],
+  ['certs', '11x AWS · 4x Azure'],
+];
+---
+
+<Section
+  id="about"
+  num="01"
+  kicker="about"
+  title="Architect, advisor, builder"
+  avatar={withBase(SITE.photo)}
+  avatarAlt={SITE.photoAlt}
+>
+  <div class="grid gap-12 md:grid-cols-[1.5fr_1fr] md:gap-12">
+    <Reveal class="flex max-w-[620px] flex-col gap-[22px] text-[19px] leading-[1.62] text-muted">
+      <p>
+        I build secure cloud infrastructure for a living: landing zones, compliance platforms,
+        Kubernetes. At <b class="font-semibold text-text">Microsoft</b> today, and at
+        <b class="font-semibold text-text">AWS</b> before that, mostly for Canadian government
+        and enterprise.
+      </p>
+      <p>
+        But I spend as much time with customers as with code. I scope engagements, advise the
+        executives signing off on them, and turn dense architecture into something a buyer
+        actually understands and wants. That's the technical-sales side of the same job, and
+        it's where I do my best work.
+      </p>
+      <p>
+        I also build products: <b class="font-semibold text-text">latchkey</b>, an AI-powered
+        CI/CD platform, and <b class="font-semibold text-text">WordDrop</b>, a minimalist
+        vocabulary game on the App Store. The throughline is taking something complex and making
+        it feel effortless to use, and to buy.
+      </p>
+      <p>Currently finishing an MSCS at Georgia Tech.</p>
+    </Reveal>
+
+    <Reveal>
+      <dl class="rounded-[14px] border border-line bg-surface px-7 py-6 font-mono text-[13.5px] leading-[1.5]">
+        {
+          facts.map(([k, v]) => (
+            <div class="grid grid-cols-[84px_1fr] gap-x-4 gap-y-3.5 [&:not(:last-child)]:mb-3.5">
+              <dt class="text-subtle">{k}</dt>
+              <dd class={k === 'certs' ? 'text-accent' : 'text-text'}>{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </Reveal>
+  </div>
+</Section>
