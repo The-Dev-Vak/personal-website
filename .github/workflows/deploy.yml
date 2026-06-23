@@ -1,7 +1,8 @@
 name: Deploy to GitHub Pages
 
-# Builds the Astro site and deploys it via the GitHub Pages "GitHub Actions"
-# source. In repo Settings → Pages, set Source: GitHub Actions (the default).
+# Builds the Astro site and deploys it via GitHub Pages (GitHub Actions source).
+# configure-pages with enablement:true turns Pages on automatically on first run,
+# so no manual Settings → Pages toggle is required.
 
 on:
   push:
@@ -23,9 +24,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Enable + configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Build with Astro
         uses: withastro/action@v3
-        # installs deps, runs `astro build`, and uploads dist/ as the Pages artifact
 
   deploy:
     needs: build
