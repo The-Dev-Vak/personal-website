@@ -34,9 +34,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
     location: 'Vancouver, BC',
     logo: 'latchkey',
     points: [
-      'Co-founded an AI-powered DevOps platform that optimizes GitHub Actions for cost, security, and pipeline performance, scaled to $5K MRR.',
+      'Co-founded a venture-backed, profitable AI-powered DevOps platform that optimizes GitHub Actions for cost, security, and pipeline performance.',
       'Led customer acquisition end-to-end, turning early users into paying customers, and owned the public landing page and onboarding flow.',
-      'Secured $25K pre-seed from LAUNCH at a $1M valuation.',
+      'Raised pre-seed funding from LAUNCH to grow the product.',
     ],
     href: 'https://latchkey.dev',
   },

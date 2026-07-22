@@ -18,7 +18,7 @@ export const SITE = {
   description:
     'Kaveh Alemi, cloud architect, founder, and technical seller. ' +
     'Secure cloud (landing zones, compliance, Kubernetes) at Microsoft and AWS, ' +
-    'across 20+ engagements with Canadian government and enterprise; ' +
+    'across 50+ engagements with Canadian government and enterprise; ' +
     'building latchkey (AI-powered CI/CD) and WordDrop (App Store).',
   location: 'Vancouver, BC',
   focus: 'cloud solutions architecture & technical pre-sales',
@@ -32,9 +32,8 @@ export const SITE = {
   base: '',
 
   // ── Links (one place to edit) ──────────────────────────────────────────
-  // email is real; the rest are TODO until provided.
+  // Contact routes to LinkedIn; no public email by design.
   links: {
-    email: 'kvalemi98@gmail.com',
     github: 'https://github.com/The-Dev-Vak',
     linkedin: 'https://www.linkedin.com/in/kvalemi/',
     appStore: 'https://apps.apple.com/us/app/worddrop-improve-vocabulary/id6757763797',
@@ -44,7 +43,6 @@ export const SITE = {
   // ── Assets ─────────────────────────────────────────────────────────────
   photo: '/img/kaveh.jpg',
   photoAlt: 'Kaveh Alemi',
-  resumePdf: '/resume.pdf', // currently the copied "Profile (2).pdf", confirm this is the right file
   ogImage: '/og.svg', // TODO: ideally export a real 1200×630 og.png for best social support
 
   // ── Credentials (rendered as mono tags) ────────────────────────────────

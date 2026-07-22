@@ -9,9 +9,9 @@ import Logo from './Logo.astro';
 const featured = PROJECTS.find((p) => p.slug === 'latchkey')!;
 const rest = PROJECTS.filter((p) => p.slug !== 'latchkey');
 const latchkeyMetrics = [
-  ['$5K', 'MRR'],
-  ['$25K', 'pre-seed'],
-  ['$1M', 'valuation'],
+  ['Venture', 'backed'],
+  ['Profitable', 'and growing'],
+  ['Agentic', 'AI backend'],
 ];
 const externalFor = (slug: string) =>
   slug === 'worddrop' ? { label: 'App Store', url: SITE.links.appStore } : undefined;
@@ -54,7 +54,7 @@ const externalFor = (slug: string) =>
   <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
     {
       rest.map((p) => {
-        const ext = externalFor(p.slug);
+        const ext = p.external ?? externalFor(p.slug);
         const caseHref = p.href ? withBase(p.href) : undefined;
         return (
           <Reveal
@@ -93,7 +93,12 @@ const externalFor = (slug: string) =>
                   </a>
                 )}
                 {ext && (
-                  <a href={ext.url} target="_blank" rel="noopener" class="text-muted hover:text-text">
+                  <a
+                    href={ext.url}
+                    target="_blank"
+                    rel="noopener"
+                    class={caseHref ? 'text-muted hover:text-text' : 'text-accent hover:underline'}
+                  >
                     ↗ {ext.label}
                   </a>
                 )}

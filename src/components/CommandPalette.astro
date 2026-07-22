@@ -15,10 +15,10 @@ const items = [
   { label: 'Contact', hint: 'section', type: 'section', value: 'contact' },
   { label: 'latchkey — case study', hint: 'page', type: 'link', value: withBase('/projects/latchkey') },
   { label: 'WordDrop — case study', hint: 'page', type: 'link', value: withBase('/projects/worddrop') },
-  { label: 'Email me', hint: 'external', type: 'external', value: `mailto:${SITE.links.email}` },
   { label: 'GitHub', hint: 'external', type: 'external', value: SITE.links.github },
   { label: 'LinkedIn', hint: 'external', type: 'external', value: SITE.links.linkedin },
   { label: 'latchkey.dev', hint: 'external', type: 'external', value: SITE.links.latchkey },
+  { label: 'muskfree.money', hint: 'external', type: 'external', value: 'https://muskfree.money' },
   { label: 'Off the clock', hint: 'section', type: 'section', value: 'beyond' },
 ];
 ---
@@ -136,7 +136,7 @@ const items = [
       } else if (type === 'link') {
         window.location.href = value;
       } else if (type === 'external') {
-        window.open(value, value.startsWith('mailto:') ? '_self' : '_blank');
+        window.open(value, '_blank');
       } else if (type === 'theme') {
         const isDark = document.documentElement.classList.toggle('dark');
         const theme = isDark ? 'dark' : 'light';

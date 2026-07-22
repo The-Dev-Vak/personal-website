@@ -4,11 +4,8 @@ import { SITE } from '../config/site';
 const built = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
 
 const contacts = [
-  { label: 'email', value: SITE.links.email, href: `mailto:${SITE.links.email}`, ext: false },
-  { label: 'github', value: 'The-Dev-Vak', href: SITE.links.github, ext: true },
   { label: 'linkedin', value: 'in/kvalemi', href: SITE.links.linkedin, ext: true },
-  { label: 'app store', value: 'WordDrop', href: SITE.links.appStore, ext: true },
-  { label: 'latchkey', value: 'latchkey.dev', href: SITE.links.latchkey, ext: true },
+  { label: 'github', value: 'The-Dev-Vak', href: SITE.links.github, ext: true },
 ];
 ---
 
@@ -24,7 +21,7 @@ const contacts = [
       Let's build something excellent.
     </h2>
     <p class="mt-5 max-w-xl text-[19px] leading-relaxed text-muted">
-      A cloud problem, a product, or a role worth talking about. Email is the fastest way to
+      A cloud problem, a product, or a role worth talking about. LinkedIn is the fastest way to
       reach me, everything else is below.
     </p>
   </div>

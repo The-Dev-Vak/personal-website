@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     kind: 'founder · ai-powered ci/cd',
     blurb:
       'Self-healing GitHub Actions: an agentic AI backend that surfaces cloud cost, security, and pipeline-performance insights, then fixes them.',
-    metrics: ['$5K MRR', '$25K pre-seed', '$1M valuation'],
+    metrics: ['venture-backed', 'profitable', 'agentic ai'],
     href: '/projects/latchkey',
     external: { label: 'latchkey.dev', url: 'https://latchkey.dev' },
   },
@@ -40,6 +40,15 @@ export const PROJECTS: Project[] = [
     metrics: ['App Store', 'privacy-first', 'zero data collected'],
     href: '/projects/worddrop',
     // external App Store link is read from SITE.links.appStore in the UI
+  },
+  {
+    slug: 'muskfree',
+    name: 'muskfree.money',
+    kind: 'side quest · certified nonsense',
+    blurb:
+      'A deeply unserious weekend build: type in any ETF and get an official-looking MUSK-FREE CERTIFIED™ stamp, or a damning CONTAINS MUSK verdict, on how much Elon is quietly riding along in your index fund. 100% a joke, 0% financial advice.',
+    metrics: ['weekend build', 'certified™ nonsense', 'not financial advice'],
+    external: { label: 'muskfree.money', url: 'https://muskfree.money' },
   },
   {
     slug: 'pronghorn',

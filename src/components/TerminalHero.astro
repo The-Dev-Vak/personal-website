@@ -6,12 +6,10 @@ const term = {
   name: SITE.name,
   role: SITE.role,
   pitch: SITE.pitch,
-  email: SITE.links.email,
   github: SITE.links.github,
   linkedin: SITE.links.linkedin,
   latchkey: SITE.links.latchkey,
   appStore: SITE.links.appStore,
-  resumeHref: withBase(SITE.resumePdf),
   latchkeyPage: withBase('/projects/latchkey'),
   worddropPage: withBase('/projects/worddrop'),
 };
@@ -45,7 +43,7 @@ const term = {
         </h1>
         <p class="mt-6 max-w-[520px] text-[19px] leading-[1.6] text-muted">
           Cloud solutions architect at Microsoft and AWS, founder at latchkey, and the
-          technical-sales side of every deal. 20+ engagements across Canadian government and
+          technical-sales side of every deal. 50+ engagements across Canadian government and
           enterprise.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3.5">
@@ -101,7 +99,7 @@ const term = {
               class="w-full flex-1 border-none bg-transparent font-mono outline-none"
               style="color:#C7CCD4;caret-color:#5b8cff;"
               placeholder="type 'help' and hit enter"
-              aria-label="Terminal: try help, whoami, projects, resume, contact"
+              aria-label="Terminal: try help, whoami, projects, contact"
               spellcheck="false"
               autocapitalize="off"
             />
@@ -223,13 +221,14 @@ const term = {
       ].join('\n'),
     contact: () =>
       [
-        `email      ${link('mailto:' + term.email, term.email, false)}`,
-        `github     ${link(term.github, term.github)}`,
         `linkedin   ${link(term.linkedin, term.linkedin)}`,
+        `github     ${link(term.github, term.github)}`,
       ].join('\n'),
     clear: () => { history.innerHTML = ''; return null; },
     ls: () => 'about  experience  projects  skills  certs  contact',
     sudo: () => "permission denied: nice try 😏  (you don't have root here)",
+    muskfree: () =>
+      `MUSK-FREE CERTIFIED™. A deeply unserious weekend build. 100% joke, 0% financial advice. ${link('https://muskfree.money', 'muskfree.money')}`,
     '': () => null,
   };
 
