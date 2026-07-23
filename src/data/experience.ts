@@ -29,7 +29,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
   },
   {
     company: 'latchkey.dev',
-    role: 'Co-Founder & COO',
+    role: 'Co-Founder & CTO',
     dates: 'Aug 2025 to Present',
     location: 'Vancouver, BC',
     logo: 'latchkey',
